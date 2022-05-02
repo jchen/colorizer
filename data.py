@@ -10,13 +10,14 @@ class Dataset:
     """
 
     def __init__(self, data_path):
-        """ """
+        """
+        Initialize the Dataset object.
+        """
         self.data_path = data_path
 
         self.train_data = self.get_data(os.path.join(self.data_path, "train/"))
 
         self.test_data = self.get_data(os.path.join(self.data_path, "test/"))
-
 
     def get_data(self, path, shuffle=False, augment=False):
         """
@@ -40,9 +41,9 @@ class Dataset:
             shuffle=shuffle,
         )
 
-        return data
+        return self.data_rgb_to_l_ab(data)
 
-    def data_rgb_to_ab(self, data):
+    def data_rgb_to_l_ab(self, data):
         """
         Converts the RGB data to L+AB data.
         """
