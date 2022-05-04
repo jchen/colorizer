@@ -47,12 +47,13 @@ class Dataset:
         """
         Converts the RGB data to L+AB data.
         """
+        img_size = hp.img_size
         for im in data:
-            for im in im:
-                im_lab = rgb2lab(im)
-                im_l = im_lab[:, :, [0]]
-                im_ab = im_lab[:, :, [1, 2]]
-                yield (im_l, im_ab)
+            im = im[0]
+            im_lab = rgb2lab(im)
+            im_l = im_lab[:, :, :, [0]]
+            im_ab = im_lab[:, :, :, [1, 2]]
+            yield (im_l, im_ab)
 
     def standardize(self, img):
         return img

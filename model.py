@@ -1,7 +1,15 @@
 import hyperparameters as hp
 
 import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, MaxPool2D, Dropout, Flatten, Dense
+from tensorflow.keras.layers import (
+    Conv2D,
+    MaxPool2D,
+    Dropout,
+    Flatten,
+    Dense,
+    UpSampling2D,
+    Reshape,
+)
 
 
 class Model(tf.keras.Model):
@@ -10,11 +18,13 @@ class Model(tf.keras.Model):
         self.optimizer = tf.keras.optimizers.Adam(learning_rate=hp.learning_rate)
 
         self.architecture = [
-            Dense(units=256, activation="relu", name="dense1_256"),
-            Dropout(0.5),
-            Dense(units=256, activation="relu", name="dense2_256"),
-            Dropout(0.5),
-            Dense(units=15, activation="softmax"),
+            Conv2D(64, (2, 2), activation="relu", padding="same", strides=2),
+            Conv2D(64, (2, 2), activation="relu", padding="same", strides=2),
+            Conv2D(64, (2, 2), activation="relu", padding="same", strides=2),
+            Flatten(),
+            Dense(64),
+            Dense(256 * 256 * 2, activation="relu"),
+            Reshape((256, 256, 2), input_shape=(256 * 256 * 2,)),
         ]
 
     def call(self, x):
