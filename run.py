@@ -11,6 +11,7 @@ def train(model, datasets):
         x=datasets.train_data,
         validation_data=datasets.test_data,
         epochs=hp.num_epochs,
+        steps_per_epoch=10,
         batch_size=None,
     )
 
@@ -25,8 +26,14 @@ def test(model, test_data):
 def main():
     dataset = Dataset("data/")
     model = Model()
-    model(tf.keras.Input(shape=(hp.img_size, hp.img_size)))
-    model.summary()
+    model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 1)))
+    print(model.summary())
+    model.compile(
+        optimizer=model.optimizer,
+        loss="mse",
+        metrics=[tf.keras.metrics.MeanSquaredError()],
+    )
+    train(model, dataset)
 
 
 if __name__ == "__main__":

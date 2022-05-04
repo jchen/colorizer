@@ -18,13 +18,24 @@ class Model(tf.keras.Model):
         self.optimizer = tf.keras.optimizers.Adam(learning_rate=hp.learning_rate)
 
         self.architecture = [
-            Conv2D(64, (2, 2), activation="relu", padding="same", strides=2),
-            Conv2D(64, (2, 2), activation="relu", padding="same", strides=2),
-            Conv2D(64, (2, 2), activation="relu", padding="same", strides=2),
-            Flatten(),
-            Dense(64),
-            Dense(256 * 256 * 2, activation="relu"),
-            Reshape((256, 256, 2), input_shape=(256 * 256 * 2,)),
+            Conv2D(64, (3, 3), activation="relu", padding="same", strides=2),
+            Conv2D(128, (3, 3), activation="relu", padding="same"),
+            Conv2D(128, (3, 3), activation="relu", padding="same", strides=2),
+            Conv2D(256, (3, 3), activation="relu", padding="same"),
+            Conv2D(256, (3, 3), activation="relu", padding="same", strides=2),
+            Conv2D(512, (3, 3), activation="relu", padding="same"),
+            Conv2D(512, (3, 3), activation="relu", padding="same"),
+            Conv2D(256, (3, 3), activation="relu", padding="same"),
+            Conv2D(256, (1, 1), activation="relu", padding="same"),
+            Conv2D(256, (3, 3), activation="relu", padding="same"),
+            Conv2D(128, (3, 3), activation="relu", padding="same"),
+            UpSampling2D((2, 2)),
+            Conv2D(64, (3, 3), activation="relu", padding="same"),
+            Conv2D(64, (3, 3), activation="relu", padding="same"),
+            UpSampling2D((2, 2)),
+            Conv2D(32, (3, 3), activation="relu", padding="same"),
+            Conv2D(2, (3, 3), activation="tanh", padding="same"),
+            UpSampling2D((2, 2)),
         ]
 
     def call(self, x):
