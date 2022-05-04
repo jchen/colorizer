@@ -48,7 +48,17 @@ class Dataset:
         Converts the RGB data to L+AB data.
         """
         for im in data:
-            im_lab = rgb2lab(im)
-            im_l = im_lab[:, :, [0]]
-            im_ab = im_lab[:, :, [1, 2]]
-            yield (im_l, im_ab)
+            for im in im:
+                im_lab = rgb2lab(im)
+                im_l = im_lab[:, :, [0]]
+                im_ab = im_lab[:, :, [1, 2]]
+                yield (im_l, im_ab)
+
+    def standardize(self, img):
+        return img
+
+    def preprocess_fn(self, img):
+        """Preprocess function for ImageDataGenerator."""
+        img = img / 255.0
+        img = self.standardize(img)
+        return img

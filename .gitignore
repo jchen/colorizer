@@ -133,3 +133,5 @@ dmypy.json
 
 *.tar
 data/test_256/
+
+.DS_Store
