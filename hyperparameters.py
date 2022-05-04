@@ -1,4 +1,4 @@
-image_size = 256
+image_size = 244
 
 batch_size = 150
 
