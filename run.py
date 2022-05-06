@@ -3,7 +3,7 @@ import tensorflow as tf
 
 from data import Dataset
 import hyperparameters as hp
-from model import Model
+from model import ColorizingModel as Model
 
 
 def train(model, datasets):
