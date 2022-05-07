@@ -132,6 +132,7 @@ dmypy.json
 .vscode
 
 *.tar
-data/test_256/
+data/test/
+data/train/
 
 .DS_Store

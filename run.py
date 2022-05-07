@@ -12,7 +12,6 @@ def train(model, datasets):
         validation_data=datasets.test_data,
         epochs=hp.num_epochs,
         steps_per_epoch=10,
-        batch_size=None,
     )
 
 

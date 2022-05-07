@@ -1,5 +1,6 @@
 import os
 import tensorflow as tf
+from keras.preprocessing.image import ImageDataGenerator
 import hyperparameters as hp
 from skimage.color import rgb2lab, gray2rgb
 
@@ -24,11 +25,11 @@ class Dataset:
         Gets the data at path, shuffling and augmenting as desired.
         """
         if augment:
-            data = tf.keras.preprocessing.image.ImageDataGenerator(
+            data = ImageDataGenerator(
                 preprocessing_function=self.preprocess_fn,
             )
         else:
-            data = tf.keras.preprocessing.image.ImageDataGenerator(
+            data = ImageDataGenerator(
                 preprocessing_function=self.preprocess_fn
             )
 
