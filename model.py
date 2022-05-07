@@ -17,6 +17,7 @@ class ColorizingModel(Model):
     def __init__(self):
         super(ColorizingModel, self).__init__()
         self.optimizer = tf.keras.optimizers.Adam(learning_rate=hp.learning_rate)
+        # self.optimizer = tf.keras.optimizers.SGD(learning_rate=hp.learning_rate)
 
         self.architecture = [
             Conv2D(64, (3, 3), activation="relu", padding="same", strides=2),
