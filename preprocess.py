@@ -38,10 +38,6 @@ class Datasets():
     def calc_mean_and_std(self):
         """ Calculate mean and standard deviation of a sample of the
         training dataset for standardization.
-
-        Arguments: none
-
-        Returns: none
         """
 
         # Get list of all images in training directory
@@ -106,15 +102,8 @@ class Datasets():
         Returns:
             img - numpy array of shape (image size, image size, 3)
         """
-
-        # TODO: Standardize the input image. Use self.mean and self.std
-        #       that were calculated in calc_mean_and_std() to perform
-        #       the standardization.
-        # =============================================================
         
         img = (img - self.mean) / self.std
-
-        # =============================================================
 
         return img
 
@@ -148,7 +137,6 @@ class Datasets():
         """
 
         if augment:
-
             data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
                 preprocessing_function=self.preprocess_fn,
                 rotation_range=15,

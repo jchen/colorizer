@@ -46,16 +46,15 @@ class Dataset:
         return self.data_rgb_to_l_ab(data)
 
     
-    # def data_rgb_to_l_ab(self, data):
-    #     """
-    #     Converts the RGB data to L+AB data.
-    #     """
-    #     for im in data:
-    #         im_lab = rgb2lab(im)
-    #         im_l = im_lab[:, :, [0]]
-    #         im_ab = im_lab[:, :, [1, 2]]
-    #         yield (im_l, im_ab)
-    #     return im_l
+    def data_rgb_to_l_ab(self, data):
+        """
+        Converts the RGB data to L+AB data.
+        """
+        for im in data:
+            im_lab = rgb2lab(im)
+            im_l = im_lab[:, :, [0]]
+            im_ab = im_lab[:, :, [1, 2]]
+            yield (im_l, im_ab)
             
             
     # Convert all training images from the RGB color space to the Lab color space.
@@ -77,10 +76,7 @@ class Dataset:
         
     
     # load and scale image
-    def preprocess(self, image):
-        # image = cv2.imread(image)
-        scaled = image.astype("float32") / 255.0
-        resized = cv2.resize(scaled, (224, 224))
+    def rgb_to_lab(self, image):
         
         # # lab postprocess
         lab = cv2.cvtColor(scaled, cv2.COLOR_BGR2LAB)
