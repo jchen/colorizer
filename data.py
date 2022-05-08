@@ -29,9 +29,7 @@ class Dataset:
                 preprocessing_function=self.preprocess_fn,
             )
         else:
-            data = ImageDataGenerator(
-                preprocessing_function=self.preprocess_fn
-            )
+            data = ImageDataGenerator(preprocessing_function=self.preprocess_fn)
 
         img_size = hp.img_size
 
