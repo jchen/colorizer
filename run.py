@@ -52,18 +52,6 @@ def main():
         loss="mean_squared_error",
         metrics=[keras.metrics.MeanSquaredError()],
     )
-    tf.keras.utils.plot_model(
-        model,
-        to_file="model.png",
-        show_shapes=True,
-        show_dtype=True,
-        show_layer_names=True,
-        rankdir="TB",
-        expand_nested=False,
-        dpi=96,
-        layer_range=None,
-        show_layer_activations=True,
-    )
     train(model, dataset)
 
 
