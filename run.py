@@ -1,11 +1,14 @@
 import os
 import tensorflow as tf
 
+# tf.compat.v1.disable_eager_execution()
 from tensorflow import keras
 
 from data import Dataset
 import hyperparameters as hp
-from model import UNetModel as Model
+
+# from model import UNetModel as Model
+from model import build_unet_model
 
 from tensorboard_utils import CustomModelSaver
 
@@ -13,7 +16,6 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 
 def train(model, datasets, logs_path="logs/", checkpoint_path="checkpoint/"):
-
     callback_list = [
         keras.callbacks.TensorBoard(
             log_dir=logs_path,
@@ -42,14 +44,26 @@ def test(model, test_data):
 
 def main():
     dataset = Dataset("data/")
-    model = Model()
-    model(keras.Input(shape=(hp.img_size, hp.img_size, 1)))
-    model.compile(
-        optimizer=model.optimizer,
-        loss=model.loss_fn,
-        metrics=[keras.metrics.MeanSquaredError],
-    )
+    model = build_unet_model((hp.img_size, hp.img_size, 3))
+    model(keras.Input(shape=(hp.img_size, hp.img_size, 3)))
     print(model.summary())
+    model.compile(
+        optimizer=tf.keras.optimizers.Adam(learning_rate=hp.learning_rate),
+        loss="mean_squared_error",
+        metrics=[keras.metrics.MeanSquaredError()],
+    )
+    tf.keras.utils.plot_model(
+        model,
+        to_file="model.png",
+        show_shapes=True,
+        show_dtype=True,
+        show_layer_names=True,
+        rankdir="TB",
+        expand_nested=False,
+        dpi=96,
+        layer_range=None,
+        show_layer_activations=True,
+    )
     train(model, dataset)
 
 

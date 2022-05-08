@@ -50,7 +50,8 @@ class Dataset:
         for im in data:
             im = im[0]
             im_lab = rgb2lab(im)
-            im_l = im_lab[:, :, :, [0]]
+            # We need 3 identical channels because of our pretrained model backbones.
+            im_l = im_lab[:, :, :, [0, 0, 0]]
             im_ab = im_lab[:, :, :, [1, 2]]
             yield (im_l, im_ab)
 
