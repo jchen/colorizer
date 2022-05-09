@@ -31,6 +31,8 @@ def test(image_path, out_dir="output"):
 
         image_lab = rgb2lab(image_rgb)
         image_l = image_lab[:, :, [0, 0, 0]]
+        image_a_original = image_lab[:, :, [1]]
+        image_b_original = image_lab[:, :, [2]]
         # Run the model on image_l to get predicted ab channels
         image_ab = model.predict(image_l[np.newaxis, ...])
         image_ab = image_ab[0]
@@ -53,9 +55,11 @@ def test(image_path, out_dir="output"):
 
         # Visualize A and B channels
         ax[3].imshow(image_ab[:, :, 0], cmap="gray")
+        # ax[3].imshow(image_a_original, cmap="gray")
         ax[3].set_title("A Channel")
 
         ax[4].imshow(image_ab[:, :, 1], cmap="gray")
+        # ax[4].imshow(image_b_original, cmap="gray")
         ax[4].set_title("B Channel")
 
         save_path = os.path.join(out_dir, os.path.basename(image_path))
@@ -75,9 +79,10 @@ def clear(plt):
 """
 Usage: python visualize.py
 """
-visualize_images = range(1, 36501)
+# visualize_images = range(1, 36501)
 # Sample 100 of visualize_images
-visualize_images = np.random.choice(visualize_images, 50, replace=False)
+# visualize_images = np.random.choice(visualize_images, 50, replace=False)
+visualize_images = [11022]
 for i in tqdm(visualize_images):
     test_images_numbers = [i]
     test_images = [
