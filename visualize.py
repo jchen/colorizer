@@ -76,6 +76,8 @@ def clear(plt):
 Usage: python visualize.py
 """
 visualize_images = range(1, 36501)
+# Sample 100 of visualize_images
+visualize_images = np.random.choice(visualize_images, 50, replace=False)
 for i in tqdm(visualize_images):
     test_images_numbers = [i]
     test_images = [

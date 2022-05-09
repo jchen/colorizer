@@ -25,7 +25,7 @@ def parse_args():
     )
     parser.add_argument(
         "--data",
-        default=".." + os.sep + "data" + os.sep,
+        default="." + os.sep + "data" + os.sep,
         help="Location where the dataset is stored.",
     )
     parser.add_argument(
@@ -73,7 +73,7 @@ def test(model, test_data):
 
 
 def main():
-    dataset = Dataset("data/")
+    dataset = Dataset(ARGS.data)
     model = build_unet_model((hp.img_size, hp.img_size, 3))
     model(keras.Input(shape=(hp.img_size, hp.img_size, 3)))
     print(model.summary())
