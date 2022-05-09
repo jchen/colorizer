@@ -20,13 +20,14 @@ class Dataset:
 
         self.test_data = self.get_data(os.path.join(self.data_path, "test/"))
 
-    def get_data(self, path, shuffle=False, augment=False):
+    def get_data(self, path, shuffle=False, augment=True):
         """
         Gets the data at path, shuffling and augmenting as desired.
         """
         if augment:
             data = ImageDataGenerator(
                 preprocessing_function=self.preprocess_fn,
+                horizontal_flip=True,
             )
         else:
             data = ImageDataGenerator(preprocessing_function=self.preprocess_fn)
@@ -55,11 +56,7 @@ class Dataset:
             im_ab = im_lab[:, :, :, [1, 2]]
             yield (im_l, im_ab)
 
-    def standardize(self, img):
-        return img
-
     def preprocess_fn(self, img):
         """Preprocess function for ImageDataGenerator."""
         img = img / 255.0
-        img = self.standardize(img)
         return img

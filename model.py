@@ -14,6 +14,7 @@ from tensorflow.keras.layers import (
     Dense,
     UpSampling2D,
     Reshape,
+    Rescaling,
 )
 from tensorflow.keras.applications import VGG16, ResNet50V2
 
@@ -75,8 +76,8 @@ def build_unet_model(input_shape):
         input_shape=(hp.img_size, hp.img_size, 3),
         input_tensor=inputs,
     )
-    for layer in vgg16.layers:
-        layer.trainable = False
+    # for layer in vgg16.layers:
+    #     layer.trainable = False
 
     resnet = ResNet50V2(
         include_top=False,
@@ -118,6 +119,7 @@ def build_unet_model(input_shape):
     x = BatchNormalization()(x)
 
     x = Conv2DTranspose(2, 3, strides=1, padding="same")(x)
-    x = BatchNormalization()(x)
+    x = Activation("sigmoid")(x)
+    x = Rescaling(scale=255.0, offset=-128)(x)
 
     return Model(inputs=inputs, outputs=x)
