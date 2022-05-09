@@ -76,8 +76,8 @@ def build_unet_model(input_shape):
         input_shape=(hp.img_size, hp.img_size, 3),
         input_tensor=inputs,
     )
-    # for layer in vgg16.layers:
-    #     layer.trainable = False
+    for layer in vgg16.layers:
+        layer.trainable = False
 
     resnet = ResNet50V2(
         include_top=False,
