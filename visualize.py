@@ -64,9 +64,10 @@ def test(image_path, out_dir="output"):
 
         save_path = os.path.join(out_dir, os.path.basename(image_path))
 
+    # Change these lines to have it save instead of show.
     plt.savefig(save_path)
     # clear(plt)
-    # plt.show()
+    plt.show()
 
 
 def clear(plt):
@@ -80,7 +81,6 @@ def clear(plt):
 Usage: python visualize.py
 """
 # visualize_images = range(1, 36501)
-# Sample 100 of visualize_images
 # visualize_images = np.random.choice(visualize_images, 50, replace=False)
 visualize_images = [11022]
 for i in tqdm(visualize_images):
