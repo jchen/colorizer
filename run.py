@@ -1,14 +1,19 @@
+"""
+Colorizer run.py
+Jiahua Chen, Kathy Li, Sreshtaa Rajesh, Kiara Vong
+
+python run.py --help
+for usage. Trains the model and saves. 
+"""
 import os
 import argparse
 import tensorflow as tf
 
-# tf.compat.v1.disable_eager_execution()
 from tensorflow import keras
 
 from data import Dataset
 import hyperparameters as hp
 
-# from model import UNetModel as Model
 from model import build_unet_model
 
 from tensorboard_utils import CustomModelSaver

@@ -1,3 +1,9 @@
+"""
+Colorizer data.py
+Jiahua Chen, Kathy Li, Sreshtaa Rajesh, Kiara Vong
+
+Loads data from data folders and create image generator that outputs ((L), (a, b)) channels. 
+"""
 import os
 import tensorflow as tf
 from keras.preprocessing.image import ImageDataGenerator

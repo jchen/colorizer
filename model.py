@@ -1,3 +1,10 @@
+"""
+Colorizer model.py
+Jiahua Chen, Kathy Li, Sreshtaa Rajesh, Kiara Vong
+
+Model for colorizing images.
+Uses a U-Net architecture with VGG + ResNet50 backbone. 
+"""
 import hyperparameters as hp
 
 import tensorflow as tf
