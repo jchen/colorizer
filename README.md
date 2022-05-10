@@ -33,3 +33,6 @@ However, it fails with vibrant colors, patterns, and produces some artifacts:
 ## Next Steps
  - Attempt other Losses that incentivize colors that are more vibrant. 
  - Incorporate a GAN. 
+
+## Poster
+![Poster](https://github.com/jchen/colorizer/blob/main/presentation/Poster.jpg?raw=true)
